@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jeremy Duong | Cybersecurity • Cloud • Supply Chain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --accent: #a5b4fc; /* soft indigo */
+      --accent-soft: #e0f2fe; /* soft blue */
+      --accent-pink: #ffe4f3;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.08);
+      --radius-xl: 1.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #f7f7fb 40%, #ffe4f3 90%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #4b5563;
+    }
+
+    nav a {
+      margin-left: 16px;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #4b5563;
+      padding: 6px 12px;
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-1px);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius-xl);
+      padding: 24px 22px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 26px 24px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(165, 180, 252, 0.3), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(244, 174, 196, 0.35), transparent 55%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+    }
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 35px rgba(79, 70, 229, 0.35);
+  background: #e5e7eb; /* neutral fallback behind the photo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* tweak these to move the crop slightly right & up so your face is centered */
+  object-position: 40% 25%;
+}
+
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 0.98rem;
+      color: #4b5563;
+      margin-bottom: 12px;
+    }
+
+    .hero-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.18);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #ec4899);
+      color: #ffffff;
+      box-shadow: 0 18px 35px rgba(99, 102, 241, 0.42);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 40px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.9);
+      color: #4b5563;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .btn-ghost:hover {
+      background: #f3f4ff;
+      transform: translateY(-1px);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(224, 242, 254, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: #1f2933;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .project-card {
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      background: radial-gradient(circle at top left, #eef2ff 0, #ffffff 60%);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      transition: transform 0.12s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      cursor: default;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 35px rgba(148, 163, 184, 0.45);
+      border-color: rgba(99, 102, 241, 0.6);
+    }
+
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(236, 252, 203, 0.9);
+      border: 1px solid rgba(132, 204, 22, 0.7);
+      color: #3f6212;
+      white-space: nowrap;
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      font-size: 0.76rem;
+      color: #6b7280;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .meta-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.03);
+    }
+
+    .project-link {
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: #4f46e5;
+    }
+
+    .experience-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .exp-item {
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(209, 213, 219, 0.9);
+    }
+
+    .exp-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .exp-role {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .exp-org {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 3px;
+    }
+
+    .exp-time {
+      font-size: 0.76rem;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+
+    .exp-desc {
+      font-size: 0.84rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    #competitions .exp-item {
+  margin-bottom: 22px;
+}
+
+#competitions .exp-item:last-child {
+  margin-bottom: 0;
+}
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 480px) {
+      .skills-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .skill-card {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e0f2fe, #fef9c3);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.82rem;
+    }
+
+    .skill-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.86rem;
+    }
+
+    .skill-list {
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .contact {
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .contact a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 26px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header>
+      <div class="logo">JD • Portfolio</div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#competitions">Competitions</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <section>
+        <!-- HERO -->
+<div class="card hero">
+  <div class="hero-inner">
+    <div class="avatar">
+      <img src="profile.jpg" alt="Jeremy Duong" />
+    </div>
+
+    <div>
+      <h1>Jeremy Viet Duong</h1>
+      <p class="tagline">
+        Recent CIS graduate and early-career SOC &amp; Cloud Security analyst
+        focused on protecting cloud environments and the digital supply chains
+        that keep organizations running.
+      </p>
+
+      <div class="hero-pill-row">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Early-career • Cybersecurity / Cloud / Supply Chain
+        </div>
+        <div class="pill">Houston, TX (remote-friendly)</div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#projects" class="btn-primary">View projects</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- PROJECTS -->
+        <div id="projects" class="card" style="margin-top: 18px;">
+          <div class="section-title">Projects</div>
+          <p class="section-subtitle">
+            Here's a collection of the work I did throughout my CIS program, along with a few personal
+            cloud, security, and supply chain related projects I've taken on as I keep learning. these
+            projects reflect how I grew my skills in AWS, security, and full-stack development while working
+            with real teams, real deadlines, and real environments that supported different parts of a digital
+            supply chain.
+          </p>
+
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <article class="project-card">
+              <div class="project-header">
+                <div class="project-title">Azure Cloud Security Posture Assessment</div>
+                <span class="project-tag">Work Project</span>
+              </div>
+              <p class="project-desc">
+                I reviewed SGV International’s Azure setup using ScoutSuite, and Defender for Cloud to see where things could be tightened up.
+                After going through the findings, I mapped everything to CIS benchmarks, called out the issues that actually mattered, and built an LOE-vs-risk breakdown so leadership could understand what to fix first.
+                A lot of the work centered around identity, access, and small configuration gaps that could affect other systems or teams downstream.
+              </p>
+              <div class="project-meta">
+                <div class="meta-tech">
+                <span class="meta-pill">Azure</span>
+                <span class="meta-pill">Defender for Cloud</span>
+                <span class="meta-pill">ScoutSuite</span>
+                </div>
+  <a href="AzureSecurityAssessment.pdf" class="project-link" target="_blank">
+    View slides →
+  </a>
+</div>
+</article>
+
+            <!-- Project 2 -->
+<article class="project-card">
+  <div class="project-header">
+    <div class="project-title">Militia Protection Architecture (Capstone)</div>
+    <span class="project-tag">Capstone</span>
+  </div>
+
+  <p class="project-desc">
+    I served as the production architect for my CIS 4375 capstone project, building
+    the full AWS environment for a custom inventory management system for a small business.
+    Designed and deployed a secure VPC, EC2 backend, RDS MySQL database, and S3-hosted frontend
+    using CloudFormation. Focused on security, reliability, and keeping the system easy for a
+    small team to operate.
+  </p>
+
+  <div class="project-meta">
+    <div class="meta-tech">
+      <span class="meta-pill">Architecture</span>
+      <span class="meta-pill">AWS</span>
+      <span class="meta-pill">MySQL / RDS</span>
+    </div>
+
+    <a href="Legacy%20Consulting%20Capstone%20Presentation.pdf" 
+       class="project-link" 
+       target="_blank">
+       View slides →
+    </a>
+
+    &nbsp;•&nbsp;
+
+    <a href="https://github.com/alizalatif05/CIS4375_Project_Team09"
+       class="project-link"
+       target="_blank">
+       View source code →
+    </a>
+  </div>
+</article>
+
+
+            <!-- Project 3 -->
+<article class="project-card">
+  <div class="project-header">
+    <div class="project-title">MEVN Full-Stack Community Resource Platform</div>
+    <span class="project-tag">Academic</span>
+  </div>
+
+  <p class="project-desc">
+    For CIS 3339, my team and I worked on expanding an existing MEVN full-stack application
+    built for a Houston non-profit. The platform is used by Community Health Workers to manage
+    clients, events, services, and intake forms across multiple organizations. We didn’t start
+    from scratch — our job was to take over the codebase, improve it, and add new features.
+    We migrated the frontend from the Options API to the Composition API, added a working login
+    system with viewer/editor roles, built CRUD tools for services, connected the backend to a
+    cloud MongoDB Atlas instance, and cleaned up several API routes. I helped prepare our
+    Sprint 3 presentation and worked with the team to test everything end-to-end.
+  </p>
+
+  <div class="project-meta">
+    <div class="meta-tech">
+      <span class="meta-pill">MEVN Stack</span>
+      <span class="meta-pill">MongoDB Atlas</span>
+      <span class="meta-pill">Vue (Composition API)</span>
+      <span class="meta-pill">Node.js / Express</span>
+    </div>
+
+    <div>
+      <a href="CIS3339 Project Video Presentation.mp4"
+         class="project-link"
+         target="_blank">
+         View presentation →
+      </a>
+
+      &nbsp;•&nbsp;
+
+      <a href="https://github.com/CIS-UH/cis-3339-sp25-project-group-5-1"
+         class="project-link"
+         target="_blank">
+         View source code →
+      </a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 4-->
+ <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">Stock Brokerage Management System</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        I built a stock brokerage management system for my CIS 2368 final project, focusin on getting comfortable
+        with full-stack development in Python. The backend was written in Flask, and I used EJS on the frontend to
+        keep things simple and easy to work with. The system lets you manage investors, stocks, and bonds, and it
+        includes the basic rules you'd expect in a brokerage, like not letting someone sell more shares than they
+        actually own.
+    </p>
+    <div class="project-meta">
+    <div class="meta-tech">
+        <span class="meta-pill">Python / Flask</span>
+        <span class="meta-pill">EJS / Frontend</span>
+        <span class="meta-pill">SQL / Database</span>
+    </div>
+
+    <div>
+        <a href="https://www.loom.com/share/be90a8967c774d62877abd1b895bb60e?sid=898eee26-9a7d-4192-a9ee-16b847112e88"
+        class="project-link"
+        target="_blank">
+        View presentation →
+    </a>
+
+    &nbsp;•&nbsp;
+
+    <a href="https://github.com/CIS-UH/final-project-thejeremy881"
+    class="project-link"
+    target="_blank">
+    View source code →
+    </a>
+    </div>
+  </div>
+</article>
+
+<!-- Project 5 -->
+ <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">Multi-Region AWS Enterprise Cloud Architecture for GoGreen Insurance</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        For my CIS 3367 Project, I designed a multi-region AWS architecture for a fictional insurance
+        company called GoGreen. The setup used a full three-tier design across two regions, with separate VPCS,
+        subnets, EC2 app servers, RDS databases, and ElastiCache in each region. I added CloudFront, Route 53, and 
+        Global Accelerator for performance and failover, and layered in security tools like GuardDuty, WAF, Secrets Manager,
+        IAM controls, and proper network boundaries. Overall, the project gave me hands-on experience building a secure, scalable
+        cloud environment from the ground up.
+    </p>
+    <div class="project-meta">
+        <div class="meta-tech">
+            <span class="meta-pill">AWS Architecture</span>
+            <span class="meta-pill">Multi-Region</span>
+            <span class="meta-pill">VPC / Networking</span>
+            <span class="meta-pill">RDS / EC2 / ElastiCache</span>
+            <span class="meta-pill">CloudFront / Route 53</span>
+        </div>
+
+        <div>
+            <a href="3367 Project.pdf"
+            class="project-link"
+            target="_blank">
+            View documentation →
+            </a>
+
+            &nbsp;•&nbsp;
+
+        <a href="Diagram.drawio.png"
+        class="project-link"
+        target="_blank">
+    View diagram →
+</a>
+        </div>
+    </div>
+ </article>
+
+<!-- Project 6 -->
+ <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">E-Commerce Management System</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        For my CIS 4365 project, my team and I designed a full e-commerce management system using SQL
+        and ER modeling. We built out the entities, relationships, and core database features for products,
+        customers, orders, payments, and inventory. The goal was to create a database structure that could
+        support a real online store.
+    </p>
+    <div class="project-meta">
+        <div class="meta-tech">
+            <span class="meta-pill">SQL / Database</span>
+            <span class="meta-pill">ER Modeling</span>
+            <span class="meta-pill">E-Commerce</span>
+        </div>
+        <a href="ERD Database Project - Ecommerce.png"
+        class="project-link"
+        target="_blank">
+        View diagram → 
+        </a>
+    </div>
+ </article>
+
+<!-- Project 7 -->
+ <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">Python Inventory Processing System</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        For my CIS 2348 final project, I built a Python program that manages the inventory for an electronics
+        store. The program reads three CSV files for manufacturers, prices, and service dates, then combines
+        everything into a set of clean, organized inventory reports. It sorts items, flags products that are past
+        their service date, and separates damaged items into their own file. This project helped me get comfortable with
+        Python fundamentals like file input/output, dictionaries, loops, and basic data processing.
+    </p>
+    <div class="project-meta">
+        <div class="meta-tech">
+            <span class="meta-pill">Python</span>
+            <span class="meta-pill">CSV Processing</span>
+            <span class="meta-pill">File I/O</span>
+            <span class="meta-pill">Data Structures</span>
+        </div>
+        <a href="https://github.com/thejeremy881/CIS2348-Final-Project"
+        class="project-link"
+        target="_blank">
+        View source code → 
+         </a>
+    </div>
+ </article>
+
+ <!-- Project 8 -->
+  <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">Enterprise Network Design for an 8-Story Residence Hall</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        For my CIS 3347 final project, I designed the full network architecture for an eight-story residence hall at the University of Houston.
+        The building needed separate networks for residents, employees, and visitors, so I planned out a segmented design with different subnets,
+        Wi-Fi frequencies, and security layers across all eight floors. I mapped out every floor’s wired and wireless layout, placed all switches,
+        routers, WAPs, and backbone connections, and built a full cost estimate using Cisco equipment. This also included designing the MDF on the first floor,
+        distribution for floors 2–8, and a full building-wide backbone diagram that shows how traffic flows from the ISP router through the firewall,
+        core router, and into each floor’s LAN.
+    </p>
+    <div class="project-meta">
+        <div class="meta-tech">
+            <span class="meta-pill">Network Design</span>
+            <span class="meta-pill">Architecture</span>
+            <span class="meta-pill">Subnetting</span>
+        </div>
+
+        <div class="meta-links">
+        <a href="Duong_Jeremy_CIS3347_FinalClassProject.pdf"
+        class="project-link"
+        target="_blank">
+        View documentation → 
+        </a>
+
+        &nbsp;•&nbsp;
+
+        <a href="Jeremy Duong CIS3347-FinalProject - FloorPLan.pdf"
+        class="project-link"
+        target="_blank">
+        View floor plan diagram → 
+    </a>
+    </div>
+  </article>
+
+<!-- Project 9 -->
+ <article class="project-card">
+    <div class="project-header">
+        <div class="project-title">Auto Management System - Systems Analysis & Design</div>
+        <span class="project-tag">Academic</span>
+    </div>
+    <p class="project-desc">
+        For my CIS 3343 Systems Analysis and Design course, my team and I designed a full systems proposal for
+        a new Auto Management System for a fictional car dealership. Their existing dealer management application was
+        outdated, slow, and difficult to use, so our job was to analyze the client's needs and outline a modern
+        solution. I helped gather and organize requirements, document the problem, and support the creation of our data
+        flow diagrams and system proposal. Our work included defining the project scope, building the requirements list,
+        creating the context, Level 0, and Level 1 DFDs, and evaluating both custom-built and off-the-shelf alternatives.
+        We also outlined feasibility, system recommendations, and a high-level design that improved usability, performance,
+        data security, and scalability. The final deliverable was a full digital binder that walked through the entire
+        SDLC analysis phase - from identifying issues with the legacy system to proposing a modern, user-friendly dealership
+        management solution.
+    </p>
+    <div class="project-meta">
+        <div class="meta-tech">
+            <span class="meta-pill">Systems Analysis</span>
+            <span class="meta-pill">Requirements Gathering</span>
+            <span class="meta-pill">Feasibility Study</span>
+
+            <div class="meta-links">
+                <a href="Digital Binder.pdf"
+                class="project-link"
+                target="_blank">
+                View documentation →
+            </a>
+            </div>
+ </article>
+        </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <section>
+        <!-- ABOUT -->
+        <div class="card">
+          <div class="section-title">About</div>
+          <p class="section-subtitle">
+            I’m a recent CIS graduate and early-career SOC &amp; Cloud Security analyst.
+            I’m interested in how cybersecurity, cloud systems, and supply chain
+            operations connect, especially around identity, compliance, and securing
+            the services organizations rely on. I enjoy breaking down technical risks
+            and making them clear, practical, and easy for people to understand.
+          </p>
+
+          <div class="stack-chips">
+            <span class="chip">Cloud Security</span>
+            <span class="chip">SOC / Blue Team</span>
+            <span class="chip">Azure &amp; AWS</span>
+            <span class="chip">Supply Chain Security</span>
+            <span class="chip">Risk &amp; LOE analysis</span>
+            <span class="chip">Teaching &amp; Mentoring</span>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+<div id="education" class="card" style="margin-top: 18px;">
+  <div class="section-title">Education</div>
+
+  <div class="exp-item">
+    <div class="exp-topline">
+      <div>
+        <div class="exp-role">B.S. in Computer Information Systems</div>
+        <div class="exp-org">University of Houston</div>
+      </div>
+      <div class="exp-time">May 2025</div>
+    </div>
+
+    <p class="exp-desc">
+      Graduated with a focus on cybersecurity, cloud computing, and system architecture.
+      Completed hands-on projects across AWS, security architecture, supply chain systems,
+      full-stack development, and network design. Finished with strong academic momentum,
+      earning consecutive Dean’s List recognition in my final semesters.
+    </p>
+  </div>
+</div>
+
+        <!-- EXPERIENCE -->
+        <div id="experience" class="card" style="margin-top: 18px;">
+          <div class="section-title">Experience</div>
+          <div class="experience-timeline">
+            <!-- SGV -->
+            <div class="exp-item">
+              <div class="exp-topline">
+                <div>
+                  <div class="exp-role">Junior Cybersecurity Analyst</div>
+                  <div class="exp-org">SGV International</div>
+                </div>
+                <div class="exp-time">June 2025 – Present</div>
+              </div>
+              <p class="exp-desc">
+                I supported the security team by monitoring alerts, reviewing findings, and helping improve our cloud
+                and endpoint security. Most of my work focuses on Azure - checking configurations, running tools like ScoutSuite
+                and Defender for Cloud, and calling out issues that could affect identity, access, or downstream systems.
+
+                I also help maintain our email and endpoint security tools, work on weekly reports, and assist with prioritizing
+                remediation so leadership knows what needs attention first. The role has given me hands-on expereince with real
+                environments, real risks, and how small changes in security can impact the rest of the business.
+              </p>
+            </div>
+
+            <!-- American Regents Internship -->
+            <div class="exp-item">
+              <div class="exp-topline">
+                <div>
+                  <div class="exp-role">QA GxP Computer Systems Validation Intern</div>
+                  <div class="exp-org">American Regent Inc.</div>
+                </div>
+                <div class="exp-time">June 2024 – August 2024</div>
+              </div>
+              <p class="exp-desc">
+                During my intership at American Regents, I supported the IT and QA teams by helping maintain
+                several GxP-regulated systems used in manufacturing and lab environments. I assisted with system validations,
+                documentation updates, and change control tasks that had to follow FDA 21 CFR 11 requirements. I also helped troubleshoot
+                issues with user accounts, access, and device configurations, and worked closely with senior analysts to make sure everything
+                stayed compliant and audit-ready.
+
+                A lot of the work focused on reliability, accuracy, and proper documentation, so I learned how regulated systems support the
+                bigger picture of pharmaceutical manufacturing and the supply chain behind it. It was my first exposure to working in a controlled
+                environment, and it taught me the importance of doing things carefully and clearly, especially when the systems impact real products
+                and patients.
+              </p>
+            </div>
+
+            <!-- Amogy Internship -->
+            <div class="exp-item">
+              <div class="exp-topline">
+                <div>
+                  <div class="exp-role">IT Intern</div>
+                  <div class="exp-org">Amogy</div>
+                </div>
+                <div class="exp-time">February 2024 – April 2024</div>
+              </div>
+              <p class="exp-desc">
+                At Amogy, I supported the IT team with day-to-day operations across hardware, software, and user support.
+                I helped onboard new employees, set up laptops and accounts, troubleshoot issues, and keep devices compliant with
+                company policies. I also wroked with inventory, network equipment, and documentation, giving me a solid foundation in
+                how IT supports fast-moving engineering teams. The role taught me to solve problems quickly, communicate clearly, and keep
+                systems running smoothly in a growing tech environment.
+              </p>
+            </div>
+
+            <!-- Education -->
+            <div class="exp-item">
+              <div class="exp-topline">
+                <div>
+                  <div class="exp-role">Technology Operations Intern</div>
+                  <div class="exp-org">IDEA Public Schools</div>
+                </div>
+                <div class="exp-time">June 2023 - August 2023</div>
+              </div>
+              <p class="exp-desc">
+                I worked with the Technology Operations team, shadowing the computer technicians across multiple
+                campuses to learn how they support day-to-day IT needs. Most of the work involved helping troubleshoot
+                classroom and staff devices, checking equipment, and learning how they use Zendesk to track and resolve
+                tickets. It gave me a good look at how campus-level tech support works and how the IT team keeps everything
+                smootly for teachers and students.
+              </p>
+            </div>
+          </div>
+        </div>
+
+<!-- COMPETITIONS -->
+<div id="competitions" class="card" style="margin-top: 18px;">
+  <div class="section-title">Competitions</div>
+
+  <!-- Competition 1: hackMISSO -->
+  <div class="exp-item">
+    <div class="exp-topline">
+      <div>
+        <div class="exp-role">Web Designer</div>
+        <div class="exp-org">hackMISSO</div>
+      </div>
+      <div class="exp-time">March 2025</div>
+    </div>
+
+    <p class="exp-desc">
+      My team and I built a Flask fitness application at hackMISSO that included
+      personalized workouts, a simple progress dashboard, and an easy-to-use UI.
+      We deployed the app on an AWS VM and made sure the API, database, and
+      frontend worked smoothly together. We treated the setup like a small
+      "digital supply chain," focusing on how data moves through the system and
+      keeping everything reliable during the event. Our team earned 2nd place overall.
+    </p>
+
+    <div class="project-meta">
+      <div class="meta-tech">
+        <span class="meta-pill">Python / Flask</span>
+        <span class="meta-pill">Team Project</span>
+      </div>
+
+      <div class="meta-links">
+        <a href="https://github.com/thejeremy881/hackMISSO-freshfit"
+           class="project-link"
+           target="_blank">
+          View source code →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competition 2: USITCC Nationals Hackathon -->
+  <div class="exp-item">
+    <div class="exp-topline">
+      <div>
+        <div class="exp-role">Developer</div>
+        <div class="exp-org">USITCC Nationals Hackathon</div>
+      </div>
+      <div class="exp-time">April 2025</div>
+    </div>
+
+    <p class="exp-desc">
+      My team and I built <strong>InterestLink</strong>, a social web platform that connects people based on shared hobbies and
+      interests for the USITCC 2025 Hackathon competition. We designed the full system architecture, created the project documentation,
+      and deployed a working MVP on AWS using a three-tier setup with Flask (frontend), Node.js (backend), and MySQL on RDS.
+      <br><br>
+      We received <strong>Honorable Mention</strong> for our system design, cloud deployment, and overall project execution.
+    </p>
+
+    <div class="project-meta">
+      <div class="meta-tech">
+        <span class="meta-pill">AWS</span>
+        <span class="meta-pill">Flask / Node.js</span>
+        <span class="meta-pill">Systems Design</span>
+      </div>
+
+      <div class="meta-links">
+        <a href="Interest_link.pptx"
+           class="project-link"
+           target="_blank">
+          View presentation deck →
+        </a>
+
+        &nbsp;•&nbsp;
+
+        <a href="InterestLink - Final Documentation.pdf"
+        class="project-link"
+        target="_blank">
+        View documentation →
+        </a>
+
+        <a href="InterestLink Deployment Plan.docx"
+        class="project-link"
+        target="_blank">
+        View deployment plan →
+    </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+        <!-- SKILLS -->
+        <div id="skills" class="card" style="margin-top: 18px;">
+          <div class="section-title">Skills</div>
+
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-title">Cloud &amp; Security</div>
+              <div class="skill-list">
+                Azure, AWS, Defender for Cloud, IAM, security groups, network
+                design, CIS benchmarks, basic CSPM.
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-title">SOC &amp; Blue Team</div>
+              <div class="skill-list">
+                Log analysis, vulnerability findings review, email security,
+                endpoint management, dashboards, risk briefings.
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-title">Programming</div>
+              <div class="skill-list">
+                Python, basic Flask, SQL, automation scripts, CTF tooling, Linux.
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-title">Communication</div>
+              <div class="skill-list">
+                Executive-friendly reports, LOE vs. risk charts, mentoring
+                beginners, slide decks, walkthroughs.
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-title">Supply Chain Security &amp; Risk</div>
+              <div class="skill-list">
+                Cloud-based supply chain risk, identity governance, GxP / FDA-style
+                compliance, system reliability, third-party/vendor access.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div id="contact" class="card" style="margin-top: 18px;">
+          <div class="section-title">Contact</div>
+          <p class="contact">
+            Best way to reach me:
+            <br />
+            ✉️
+            <a href="mailto:thejeremyduong@gmail.com">
+              thejeremyduong@gmail.com
+            </a>
+            <br />
+            💼
+            <a href="https://www.linkedin.com/in/jeremyduong" target="_blank" rel="noreferrer">
+              LinkedIn profile
+            </a>
+            <br /><br />
+            Open to chatting about junior security roles, cloud or supply chain
+            security projects, or helping students break into cybersecurity.
+            Also exploring graduate programs that combine cybersecurity, cloud,
+            and supply chain systems.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Jeremy Duong
+    </footer>
+  </div>
+
+  <script>
+    // auto-update year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
